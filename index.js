@@ -11,7 +11,6 @@ const initializePassport = require("./passportconfig");
 const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
-
 initializePassport(
   passport,
   (email) => users.find((user) => user.email === email),
@@ -34,10 +33,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'))
-
-function getUserByEmail(email) {
-  return users.find((user) => user.email === email);
-}
 
 app.get("/", checkAuthenticated, (req, res) => {
   res.render("index", {
